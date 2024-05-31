@@ -52,4 +52,44 @@ function createWorks(work) {
 }
 
 // fonction pour ajouter les boutons par catégorie 
+// récupération tableaux catégories 
+async function getCategory (){
+const response = await fetch ("http://localhost:5678/api/categories");
+return await response.json(); 
 
+}
+getCategory(); // retourner la repone en JSon 
+
+async function displayButtons(){
+const categories =  await getCategory(); // const categories stock le resultat de la promesse await getCategory 
+
+// créer le bouton Tous avec un id 0 puis l'ajouter au filtres 
+const allBtn = document.createElement("button");
+allBtn.id = "0";
+allBtn.textContent = "Tous";
+filters.appendChild(allBtn);
+categories.forEach(category => {
+    const btn = document.createElement("button"); // créer un élément bouton pour chaque catégorie 
+    btn.textContent = category.name;
+    btn.id = category.id;
+    filters.appendChild(btn); 
+
+});
+}displayButtons();
+
+// fonction pour filtrer quand on clique sur les boutons 
+async function filterCategory(){
+    const works = await getWorks(); 
+    const buttons = document.querySelectorAll(".filters button ") // selectionner tous les btns dans filtres
+  buttons.forEach(button => {
+    button.addEventListener("click", (e)=>{
+const btnId = e.target.id
+gallery.innerHTML = ""; 
+if (btnId !== "0") {
+    
+}
+    })
+  });
+   
+}
+filterCategory();
