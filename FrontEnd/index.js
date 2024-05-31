@@ -1,45 +1,55 @@
+
+
+// ***** variables ***
 const gallery = document.querySelector(".gallery");
+const filters = document.querySelector(".filters");
 
-
-
+//fonction pour retourner le tableaux des travaux
 async function getWorks() {
-  console.log("Tentative de récupération des travaux depuis l'API");
-  const response = await fetch("http://localhost:5678/api/works");
-  if (response.ok) {
-    console.log("Réponse de l'API obtenue avec succès !");
-    return await response.json();
-    
+  const response = await fetch("http://localhost:5678/api/works"); // attendre que le fetch soit fini
+  if (!response.ok) {
+    console.log("erreur dans la récupération des travaux");
   } else {
-    console.error("Échec de la récupération des works depuis l'API");
+    return await response.json(); // convertir la reponse en json et la stocker dans responseJson
   }
 }
+getWorks();
 
-async function affichageWorks() {
-  const works = await getWorks(); // les données recupérées sont stockées dans la variables works 
-  const gallery = document.querySelector(".gallery"); //selection des éléments avec la classe gallery
-  if (gallery) { 
-      gallery.innerHTML = ""; // Efface le contenu précédent de la galerie, en vérifiant si la gallerie existe 
-     console.log(works);
-      works.forEach((element) => { // on parcourt chaque élément de works 
-          const figure = document.createElement("figure");
-          const img = document.createElement("img");
-          const figcaption = document.createElement("figcaption");
-          img.src = element.imageUrl;
-          figcaption.textContent = element.title;
-          figure.appendChild(img);
-          figure.appendChild(figcaption);
-          gallery.appendChild(figure); // l'élement figure est ajouté comme enfant de gallery 
-      });
+// fonction pour afficher les works dans le DOM
+
+async function displayWorks() {
+  const works = await getWorks();
+  const gallery = document.querySelector(".gallery"); // stocker les éléments html avec la classe gallery
+  if (gallery) {
+    gallery.innerHTML = ""; // Réinitialise le contenu de l'élément gallery, en supprimant tout son contenu HTML 
+    works.forEach((work) => {
+      const workElement = createWorks(work);
+      gallery.appendChild(workElement);
+    });
   } else {
-      console.error("Erreur : Impossible de trouver des éléments avec la classe 'gallery'");
+    console.log(
+      "Erreur : Impossible de trouver des éléments avec la classe 'gallery'"
+    );
   }
 }
-affichageWorks(); // exécution de la fonction 
+displayWorks();
 
-// ajout des filtres 
+// fonction pour créer et configurer un élément de travail
+function createWorks(work) {
+    //Le paramètre work permet de passer des informations spécifiques sur chaque travail à la fonction createWorks
+  const figure = document.createElement("figure");
+  const img = document.createElement("img"); // Crée un élément img
+  const figcaption = document.createElement("figcaption"); // Crée un élément figcaption
+  img.src = work.imageUrl; // Définit la source de l'image
+  img.alt = work.title; // Définit le texte alternatif de l'image
+  figcaption.textContent = work.title; // Définit le texte du figcaption
+  figure.dataset.categoryId = work.categoryId; // Ajoute l'ID de la catégorie en tant que data attribute
+  figure.classList.add("figure"); // Ajoute une classe css à l'élément figure
+  figure.appendChild(img); // Ajoute l'image à la figure
+  figure.appendChild(figcaption); // Ajoute le figcaption à la figure
+  return figure; // figure est retourné pour être ajouté à la galerie dans la fonction displayWorks.
 
-// récupération des catégories 
+}
 
-const getCategory = await fetch ("http://localhost:5678/api/categories");
-categories = await getCategory.json(); // convertir la réponse au format json et l'assigner à la variable categories
+// fonction pour ajouter les boutons par catégorie 
 
