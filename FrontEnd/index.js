@@ -77,19 +77,27 @@ categories.forEach(category => {
 });
 }displayButtons();
 
-// fonction pour filtrer quand on clique sur les boutons 
-async function filterCategory(){
+async function filterCategory() {
     const works = await getWorks(); 
-    const buttons = document.querySelectorAll(".filters button ") // selectionner tous les btns dans filtres
-  buttons.forEach(button => {
-    button.addEventListener("click", (e)=>{
-const btnId = e.target.id
-gallery.innerHTML = ""; 
-if (btnId !== "0") {
-    
-}
-    })
-  });
-   
-}
-filterCategory();
+    const buttons = document.querySelectorAll(".filters button"); // sélectionner tous les btns dans filtres
+    buttons.forEach(button => {
+      button.addEventListener("click", (e) => {
+        const btnId = e.target.id; // récupérer l'id du bouton cliqué 
+        gallery.innerHTML = "";
+        if (btnId === "0") {
+          // Si le bouton "Tous" est cliqué, afficher tous les travaux
+          works.forEach((work) => {
+            // const workElement = createWorks(work);
+            // gallery.appendChild(workElement);
+            displayWorks();
+          });
+        } else {
+          const filteredWorks = works.filter((work) => work.categoryId == btnId); // filtrer works par catégorie 
+          filteredWorks.forEach((work) => {
+            const workElement = createWorks(work);
+            gallery.appendChild(workElement);
+          });
+        }
+      });
+    });
+  }filterCategory();
