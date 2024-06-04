@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
 
-    <script src="./login.js" defer></script>
+    <!-- <script src="login.js" defer></script> -->
     <title>Connexion - Sophie Bluel - Architecte d'intérieur</title>
   </head>
 
@@ -37,7 +37,7 @@
     <main>
       <section id="login">
         <h2>Log in</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" id="form">
           <label for="email">E-mail</label>
           <input type="email" name="email" id="email" required />
           <label for="password">Mot de passe</label>
@@ -45,6 +45,7 @@
 
           <input type="submit" name="submit" id="submit" value="Se connecter" />
         </form>
+        <span class="error-msg"></span>
         <a href="#">Mot de passe oublié</a>
       </section>
     </main>
@@ -55,5 +56,6 @@
         </ul>
       </nav>
     </footer>
+    <script src="login.js"></script>
   </body>
 </html>
