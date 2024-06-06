@@ -209,3 +209,23 @@ footer nav ul {
     width: 100%;
     
 }
+/* style pour bouton modification */
+.modification{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+   
+}
+#modal-btn{
+    background-color: transparent;
+    border: none;
+}
+
+/* STYLE HEADER mode edition */
+.edition-mode{}
+ 
+
+/* STYLE POUR MODALE  */
+.modals-container{
+    
+}

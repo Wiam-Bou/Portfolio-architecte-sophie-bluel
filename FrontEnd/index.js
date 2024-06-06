@@ -101,3 +101,11 @@ async function filterCategory() {
       });
     });
   }filterCategory();
+
+  // recupération du token 
+
+  const tokenAuthentification = window.localStorage.getItem("token"); 
+  console.log(tokenAuthentification);
+
+
+  

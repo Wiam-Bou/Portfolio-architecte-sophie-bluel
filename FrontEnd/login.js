@@ -47,4 +47,5 @@ form.addEventListener("submit", (e) => {
     console.log(error);
     error.innerText = "Échec de la connexion. Veuillez vérifier vos informations.";
   });
+  
 });

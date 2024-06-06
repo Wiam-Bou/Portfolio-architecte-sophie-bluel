@@ -10,18 +10,24 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="index.js" defer></script>
+	<script src="https://kit.fontawesome.com/55131e5517.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<div class="edition-mode">
+		<p>mode édition</p>
+	</div>
+	<div class="mode-normal">
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><a href="login.html">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a href="login.html">login</a></li>
+			<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
 		</ul>
 	</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
@@ -36,7 +42,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="modification">
+			<h2>Mes Projets</h2>
+		<button id="modal-btn"><i class="fa-regular fa-pen-to-square fa-lg"></i>modifier</button>
+		</div>
 		<div class="filters">
 	</div>
 		<div class="gallery">
@@ -86,6 +95,7 @@
 			</figure>
 		</div>
 	</section>
+	
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -108,5 +118,14 @@
 		</ul>
 	</nav>
 </footer>
+<div class="modals-container">
+	<div class="Modal-gallery">
+<span><i class="fa-solid fa-xmark"></i></span>
+<h2 class="modal-text">Galerie photo</h2>
+<div class="works-modal"></div>
+<button class="add-btn">Ajouter une photo </button>
+	</div>
+
+</div>
 </body>
 </html>
