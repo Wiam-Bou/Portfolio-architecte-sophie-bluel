@@ -104,8 +104,7 @@ async function filterCategory() {
 
   // recupération du token 
 
-  const tokenAuthentification = window.localStorage.getItem("token"); 
-  console.log(tokenAuthentification);
+ // quand l'utilisateur est connecté 
 
+ 
 
-  

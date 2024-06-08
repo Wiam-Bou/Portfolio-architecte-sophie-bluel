@@ -60,12 +60,8 @@ body {
     font-size: 14px;
     
 }
-header {
-    display: flex;
-    justify-content: space-between;
-    margin: 50px 0;
-	max-width: 1140px;
-}
+
+
 section {
     margin: 50px 0
 }
@@ -100,11 +96,11 @@ h1 > span {
     letter-spacing: 0.1em;
 ;
 }
-h2{
+.project-txt{
     font-family: 'Syne';
     font-weight: 700;
     font-size: 30px;
-    color: #1D6154
+    color: #1D6154;
 }
 nav ul {
     display: flex;
@@ -216,16 +212,110 @@ footer nav ul {
     align-items: baseline;
    
 }
-#modal-btn{
+#modif-btn{
     background-color: transparent;
     border: none;
 }
 
 /* STYLE HEADER mode edition */
-.edition-mode{}
+.edition-mode{
+    
+	justify-content: center;
+	color:white;
+	background-color: black;
+	height: 59px;
+   width: 100%;
+   align-items: center;
+   display:flex;
+   display: none; /* réactiver via JS après login*/
+   
+}
  
 
 /* STYLE POUR MODALE  */
 .modals-container{
+    display: flex;
+     position: fixed; /* position fixe pour rester en place lors du défilement */ 
+    width: 100%;
+    height: 100%;
+    background-color: #0000004D;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 3; /* assure que la modale est au dessus du contenu de la page */
+    /* display: none; */
+   
+}
+   
+   
+.modal-gallery{
     
+    background-color: #FFFFFF;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    display: none;
+    .fa-xmark{
+        position: absolute;
+        top: 10px;  /*par rapport au bord del'élément parent*/ 
+        right: 10px;
+    }
+    .add-photo{
+        font-family: 'Syne';
+        font-weight: 700;
+        color: white;
+        background-color: #1D6154;
+        margin: 2em auto;
+        width: 180px;
+        text-align: center;
+        border-radius: 60px;
+    }
+   
+}
+.add-photo-vue{
+    background-color: #FFFFFF;
+    width: 50%;
+    height: 60%;
+    border-radius: 10Px;
+    display: flex;
+    flex-direction: column;
+
+}
+.adding-container{
+    background-color: #E8F1F6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+}
+
+
+
+ 
+  
+
+
+/* style pour header , login  */
+#loginpage{
+    display: flex;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+.mode-normal{
+    display: flex;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+   
+
+.log-out{
+    display: none;
 }

@@ -40,7 +40,7 @@ form.addEventListener("submit", (e) => {
     }
   })
   .then((data) => {
-    sessionStorage.setItem("token", data.token); // Assume the token is in the `token` field of the response
+    sessionStorage.setItem("token", data.token); 
     redirectToHome();
   })
   .catch((error) => {
