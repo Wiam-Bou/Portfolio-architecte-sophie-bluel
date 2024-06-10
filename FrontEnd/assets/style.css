@@ -119,8 +119,9 @@ li a:hover{
 	font-weight: bold;
 }
 .insta-icone{
-	width: 20px;
+	width: 22px;
 	color: #0000;
+    height: 22px;
 }
 #introduction {
     display: flex;
@@ -205,6 +206,31 @@ footer nav ul {
     width: 100%;
     
 }
+/* styles pour boutons de filtres  */
+
+.filters{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.filters button {
+    border-radius: 60px ;
+    width: 237px;
+    height: 36px;
+    border: 1px solid #1D6154;
+    background-color: #FFFFFF;
+    font-family: 'Syne';
+    font-size: 14px;
+    font-weight: 700;
+    color: #1D6154;
+    line-height: 16.8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+}
+
+
 /* style pour bouton modification */
 .modification{
     display: flex;
@@ -215,6 +241,8 @@ footer nav ul {
 #modif-btn{
     background-color: transparent;
     border: none;
+    display: none;
+    cursor: pointer;
 }
 
 /* STYLE HEADER mode edition */
@@ -244,6 +272,7 @@ footer nav ul {
     top: 0;
     left: 0;
     z-index: 3; /* assure que la modale est au dessus du contenu de la page */
+    display: none;
     /* display: none; */
    
 }
@@ -266,35 +295,139 @@ footer nav ul {
         top: 10px;  /*par rapport au bord del'élément parent*/ 
         right: 10px;
     }
-    .add-photo{
-        font-family: 'Syne';
-        font-weight: 700;
-        color: white;
-        background-color: #1D6154;
-        margin: 2em auto;
-        width: 180px;
-        text-align: center;
-        border-radius: 60px;
-    }
    
+   
+}
+.add-photo{
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
 }
 .add-photo-vue{
     background-color: #FFFFFF;
     width: 50%;
-    height: 60%;
+    height: inherit;
     border-radius: 10Px;
     display: flex;
     flex-direction: column;
+    display: none;
+
+   
+    .modal-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+    }
+    .modal-text{
+        text-align: center;
+    }
 
 }
 .adding-container{
     background-color: #E8F1F6;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    height: 169px;
+    
+    border-radius: 3px;
+    margin-top: 30px;
 
+}
+.buttons{
+    justify-content: space-between;
+    display: flex;
+    position: relative;
+   
+}
+#close-btn{
+    top:20px;
+    right: 20px;
+    position: absolute;
+    border: transparent;
+    background-color: #FFFFFF;
+    width: 12.01px;
+    height: 12.01px;
+    cursor: pointer;
+}
+
+#back-btn{
+    top:20px;
+   left: 20px;
+    position: absolute;
+    border: transparent;
+    background-color: #FFFFFF;
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.modal-text{
+    color: #000000;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30.5px;
+    margin-top: 30px;
+    
+}
+.input-modal{
+    display: flex;
+    flex-direction: column;
+}
+#category{
+    appearance: none;
+}
+.add{
+    font-family: 'Syne';
+    font-weight: 400;
+    font-size: 14px;
+   color: #306685;
+   background-color: #CBD6DC;
+   width: 173px;
+    text-align: center;
+    border-radius: 50px;
+    border: #CBD6DC;
+    height: 16px;
+    cursor: pointer;
+}
+#image-icone{
+    width:68.14px ;
+    height: 59.62px;
+color: #B9C5CC;
+
+	margin-top:30px;
+    margin-bottom:20px;
+   margin-left:20px;
+   
+  
+    
+}
+
+
+  
+    
+
+.validation-btn{
+    margin-top: 14px;
+    border-radius: 60px;
+    width: 237px;
+    height: 36px;
+    border: none;
+    background-color: #A7A7A7;
+    font-family: 'Syne';
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 16.8px;
 }
 
 
@@ -316,6 +449,3 @@ footer nav ul {
 }
    
 
-.log-out{
-    display: none;
-}
