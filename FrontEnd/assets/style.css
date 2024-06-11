@@ -60,6 +60,10 @@ body {
     font-size: 14px;
     
 }
+/* a{
+    text-decoration: none;
+    color: #000000;
+} */
 
 
 section {
@@ -117,6 +121,11 @@ li:hover {
 li a:hover{
 	color: black;
 	font-weight: bold;
+   
+}
+li a{
+    text-decoration: none;
+    color: #000000;
 }
 .insta-icone{
 	width: 22px;
@@ -256,6 +265,7 @@ footer nav ul {
    align-items: center;
    display:flex;
    display: none; /* réactiver via JS après login*/
+   gap: 10px;
    
 }
  
@@ -282,7 +292,7 @@ footer nav ul {
     
     background-color: #FFFFFF;
     width: 50%;
-    height: 50%;
+    height: 78%;
     border-radius: 10px;
     justify-content: space-around;
     display: flex;
@@ -298,6 +308,9 @@ footer nav ul {
    
    
 }
+.fa-xmark{
+    cursor: pointer;
+}
 .add-photo{
     font-family: 'Syne';
     font-weight: 700;
@@ -307,6 +320,8 @@ footer nav ul {
     width: 180px;
     text-align: center;
     border-radius: 60px;
+    height: 36px;
+    border: none;
 }
 .add-photo-vue{
     background-color: #FFFFFF;
@@ -327,6 +342,7 @@ footer nav ul {
     }
     .modal-text{
         text-align: center;
+       margin-top: 0%;
     }
 
 }
@@ -448,4 +464,23 @@ color: #B9C5CC;
 	margin: 50px 0;
 }
    
-
+/* style pour les photos affichées sur la modale  */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; /* Optionnel : Ajoute de l'espace entre les éléments */
+    box-sizing: border-box;
+  }
+  
+  .gallery-container figure {
+    margin: 0;
+    /* Ajoutez des marges ou des paddings si nécessaire */
+  }
+  
+  .gallery-container img {
+    max-width: 100%;
+    width: 76px; /* Ajustez la largeur selon vos besoins */
+    height: 102px; /* Ajustez la hauteur selon vos besoins */
+    top: 796px;
+    left: 510px;
+  }
