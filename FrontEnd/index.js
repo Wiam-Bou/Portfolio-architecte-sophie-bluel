@@ -1,4 +1,5 @@
 // ***** variables ***
+const token = sessionStorage.getItem("token");
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
@@ -103,7 +104,8 @@ filterCategory();
 
 // quand l'utilisateur est connecté
 
-document.addEventListener("DOMContentLoaded", () => { // éxécute le code après le chargement du html 
+document.addEventListener("DOMContentLoaded", () => {
+  // éxécute le code après le chargement du html
   const token = sessionStorage.getItem("token"); // afin de récupérer le token depuis le sessionStorage
   const logOut = document.querySelector("header nav .log-out");
   const modification = document.getElementById("modif-btn");
@@ -117,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => { // éxécute le code aprè
   const closeModal = document.querySelector(".close-btn");
   const secondVueModal = document.querySelector(".add-photo-vue");
 
- 
+  
 
   if (token) {
     logOut.textContent = "logout"; // remplacer login par logout quand on est connecté
@@ -171,40 +173,70 @@ document.addEventListener("DOMContentLoaded", () => { // éxécute le code aprè
 //affichage des photos dans la modale
 
 async function displayModalPhotos() {
-  const works = await getWorks(); // appeler la fonction qui récupère les travaux, déclarée plus haut
+  const works = await getWorks(); // on attend que getWorks récupère les travaux 
 
-  // créer des figures avec imgs et ids et un span pour l'icone de la suppression
-
-  const photosModal = document.querySelector(".gallery-container"); // photos ajoutées à la div avec la classe mentionnée
+  // séléctionner l'élément qui contiendra les imgs et icones de la corbeille
+  const photosModal = document.querySelector(".gallery-container");
   if (photosModal) {
+   //Si on a photosModal, on vide le contenu pour ne pas dupliquer pas les img 
+    photosModal.innerHTML = '';
+
     works.forEach((work) => {
       const figure = document.createElement("figure");
       const img = document.createElement("img");
       const trashcanIcon = document.createElement("span");
       const trash = document.createElement("i");
       trash.classList.add("fa-solid", "fa-trash-can");
-      // trash.id = work.id; // créer un id pour chaque élément à chaque itération
-      img.src = work.imageUrl; //
-      trashcanIcon.appendChild(trash); // injecter la balise trash avec la classe ajoutée dans trashcanIcon
-      figure.appendChild(trashcanIcon);
-      figure.appendChild(img);
-      photosModal.appendChild(figure);
-      trashcanIcon.classList.add("trash-can");
-      trashcanIcon.setAttribute("data-id", work.id);
-      // création d'un ad listener pour le click ( lors de la suppression)
-      trashcanIcon.addEventListener("click", async (event)=> {
-        try{
-          await deleteImage(event,work.id);
-        } catch(error){
-          console.error(" la suppression a échoué:", error);
+      trashcanIcon.appendChild(trash);
+      trashcanIcon.classList.add("trash-can"); // Ajout de classe pour le style
+      trashcanIcon.setAttribute("data-id", work.id); // Attribution de l'id à l'icone
+      trashcanIcon.addEventListener("click", async (event) => {
+        try {
+          await deleteWork(event, work.id);
+        } catch (error) {
+          console.error("erreur de suppression:", error);
         }
-      })
+      });
+      img.src = work.imageUrl;
+      img.alt = work.title;
+      figure.appendChild(img); // Ajout de l'image à la figure
+      figure.appendChild(trashcanIcon); // Ajout de l'icône de corbeille à la figure
+      photosModal.appendChild(figure); // Ajout de la figure à la galerie
     });
+  } else {
+    console.error("aucun élément n'a été trouvé")
   }
- 
 }
 
 displayModalPhotos();
 
-//fonction pour supprimer les images de la modale
+// suppression de l'image 
+async function deleteWork(event, id) {
+  try {
+    const response = await fetch("http://localhost:5678/api/works/" + id, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (response.ok) {
+      const parentFigure = event.target.closest("figure");
+      if (parentFigure) {
+        parentFigure.remove();
+        alert("Suppression réussie");
+      }
+      displayModalPhotos();
+      displayWorks();
+    } else {
+      console.error("la suppression a échoué");
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression :', error);
+    alert("Une erreur s'est produite lors de la suppression de l'image.");
+  }
+}
+
 

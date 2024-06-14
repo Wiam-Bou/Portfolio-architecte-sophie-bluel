@@ -1,5 +1,5 @@
 const form = document.querySelector("form");
-const emailInput = document.getElementById("email");
+const emailInput = document.getElementById("email-log");
 const passwordInput = document.getElementById("password");
 // Récupération du span avec la classe error-msg
 const error = document.querySelector(".error-msg");

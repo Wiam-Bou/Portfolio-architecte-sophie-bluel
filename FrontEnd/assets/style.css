@@ -241,6 +241,10 @@ footer nav ul {
     padding: 8px 12px;
 
 }
+.filters button:hover{
+    background-color: #1D6154;
+    color: white;
+}
 
 
 /* style pour bouton modification */
@@ -464,7 +468,7 @@ color: #B9C5CC;
     font-size: 30px;
     color: #1D6154;
 }
-#email{
+#email-log{
     width: 379px;
     height: 51px;
 }
@@ -526,7 +530,7 @@ color: #B9C5CC;
         display: flex;
     justify-content: center;
     align-items: center;
-   */
+  
 		
 	  }
   .trash-can{
