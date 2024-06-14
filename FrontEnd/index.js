@@ -103,7 +103,7 @@ filterCategory();
 
 // quand l'utilisateur est connecté
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { // éxécute le code après le chargement du html 
   const token = sessionStorage.getItem("token"); // afin de récupérer le token depuis le sessionStorage
   const logOut = document.querySelector("header nav .log-out");
   const modification = document.getElementById("modif-btn");
@@ -115,99 +115,96 @@ document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector(".add-photo");
   const goBackBtn = document.getElementById("back-btn");
   const closeModal = document.querySelector(".close-btn");
-  const secondVueModal = document.querySelector(".add-photo-vue"); 
+  const secondVueModal = document.querySelector(".add-photo-vue");
 
-  if(token){ 
-    logOut.textContent = "logout"; // remplacer login par logout quand on est connecté 
-    editionMode.style.display = "flex"; // afficher le mode édition 
-    modification.style.display = "block"; // afficher le bouton de modification 
-    filters.style.display = "none"; // cacher les boutons pour filtrer 
+ 
+
+  if (token) {
+    logOut.textContent = "logout"; // remplacer login par logout quand on est connecté
+    editionMode.style.display = "flex"; // afficher le mode édition
+    modification.style.display = "block"; // afficher le bouton de modification
+    filters.style.display = "none"; // cacher les boutons pour filtrer
   }
-// afficher la modale au clic sur le bouton modifier ( première vue de la modale )
+  // afficher la modale au clic sur le bouton modifier ( première vue de la modale )
 
-modification.addEventListener("click" , () =>{
+  modification.addEventListener("click", () => {
+    modalContainer.style.display = "flex";
+    displayModal.style.display = "flex";
+    secondVueModal.style.display = "none";
+  });
 
-  modalContainer.style.display = "flex";
-  displayModal.style.display = "flex";
-  secondVueModal.style.display = "none";
-})
-  
-// fermeture de la modale en cliquant sur la croix 
+  // fermeture de la modale en cliquant sur la croix
 
-closingBtns.forEach(btn => {  // pour chaque bouton fermer la modale en cliquant sur le bouton 
-  btn.addEventListener("click", () => {
-    modalContainer.style.display = "none";
+  closingBtns.forEach((btn) => {
+    // pour chaque bouton fermer la modale en cliquant sur le bouton
+    btn.addEventListener("click", () => {
+      modalContainer.style.display = "none";
+    });
+  });
+
+  //ouverture de la deuxième vue de la modale pour ajouter les photos
+  addBtn.addEventListener("click", () => {
+    displayModal.style.display = "none";
+    secondVueModal.style.display = "flex";
+  });
+  //fermer la modale en cliquant n'importe où en dehors de celle ci
+  window.onclick = function (event) {
+    if (event.target == modalContainer) {
+      modalContainer.style.display = "none";
+    }
+  };
+  // redirection vers la page de déconnexion  au clic sur logout
+
+  logOut.addEventListener("click", () => {
+    sessionStorage.removeItem("token"); // supprimer le token de sessionStorage
+    window.location.href = "login.html"; // redirige vers la page de connexion
+  });
+
+  // redirection vers la page précédente au clic sur le bouton retour
+
+  goBackBtn.addEventListener("click", () => {
+    secondVueModal.style.display = "none";
+    displayModal.style.display = "flex";
   });
 });
 
+//affichage des photos dans la modale
 
-//ouverture de la deuxième vue de la modale pour ajouter les photos 
-addBtn.addEventListener("click" , ()=>{
-  displayModal.style.display = "none";
-  secondVueModal.style.display = "flex";
-})
-//fermer la modale en cliquant n'importe où en dehors de celle ci 
-window.onclick = function(event) {
-  if( event.target == modalContainer){
-    modalContainer.style.display = "none";
-  }
-}
-  // redirection vers la page de déconnexion  au clic sur logout 
+async function displayModalPhotos() {
+  const works = await getWorks(); // appeler la fonction qui récupère les travaux, déclarée plus haut
 
-  logOut.addEventListener("click" , ()=>{
-    sessionStorage.removeItem("token"); // supprimer le token de sessionStorage
-    window.location.href = "login.html" // redirige vers la page de connexion 
-  })
+  // créer des figures avec imgs et ids et un span pour l'icone de la suppression
 
-  // redirection vers la page précédente au clic sur le bouton retour 
-
-goBackBtn.addEventListener("click", ()=>{
-  secondVueModal.style.display = "none";
-  displayModal.style.display = "flex";
-})
-
-
-});
-
-//affichage des photos dans la modale 
-
-async function displayModalPhotos (){
-  
-  const works = await getWorks() // appeler la fonction qui récupère les travaux, déclarée plus haut 
-  // créer des figures avec imgs et ids et un span pour l'icone de la suppression  
-  
-  const photosModal = document.querySelector(".gallery-container"); 
-  if(photosModal){
-    works.forEach(work => {
+  const photosModal = document.querySelector(".gallery-container"); // photos ajoutées à la div avec la classe mentionnée
+  if (photosModal) {
+    works.forEach((work) => {
       const figure = document.createElement("figure");
-    const img = document.createElement("img");
-    const trashcanIcon = document.createElement("span"); 
-    const trash = document.createElement("i");
-    trash.classList.add("fa-solid","fa-trash-can");
-    trash.id = work.id; // créer un id pour chaque élément à chaque itération 
-    img.src = work.imageUrl; //
-    trashcanIcon.appendChild(trash); // injecter la balise trash avec la classe ajoutée dans trashcanIcon
-    figure.appendChild(trashcanIcon);
-    figure.appendChild(img);
-    photosModal.appendChild(figure);
-
-
+      const img = document.createElement("img");
+      const trashcanIcon = document.createElement("span");
+      const trash = document.createElement("i");
+      trash.classList.add("fa-solid", "fa-trash-can");
+      // trash.id = work.id; // créer un id pour chaque élément à chaque itération
+      img.src = work.imageUrl; //
+      trashcanIcon.appendChild(trash); // injecter la balise trash avec la classe ajoutée dans trashcanIcon
+      figure.appendChild(trashcanIcon);
+      figure.appendChild(img);
+      photosModal.appendChild(figure);
+      trashcanIcon.classList.add("trash-can");
+      trashcanIcon.setAttribute("data-id", work.id);
+      // création d'un ad listener pour le click ( lors de la suppression)
+      trashcanIcon.addEventListener("click", async (event)=> {
+        try{
+          await deleteImage(event,work.id);
+        } catch(error){
+          console.error(" la suppression a échoué:", error);
+        }
+      })
     });
-    
   }
-  deletePhotos()
+ 
 }
 
-displayModalPhotos()
+displayModalPhotos();
 
-//fonction pour supprimer les images de la modale 
-function deletePhotos(){
-  const allTrash = document.querySelectorAll(".fa-trash-can");
-allTrash.forEach(trash => {
-  trash.addEventListener("click", ()=>{// créer un Ad listener sur chaque poubelle 
-  const id = trash.id 
-  })
-});
+//fonction pour supprimer les images de la modale
 
-  // })
-}
