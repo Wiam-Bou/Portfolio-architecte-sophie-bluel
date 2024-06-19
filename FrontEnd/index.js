@@ -239,4 +239,111 @@ async function deleteWork(event, id) {
   }
 }
 
+// Ajout de projets
 
+document.addEventListener("DOMContentLoaded", () => {
+  const formElement = document.querySelector(".upload-form"); // récup le form
+  const inputFile = document.getElementById("image");
+  const labelFile = document.getElementById("label-image");
+  const photoPreview = document.getElementById("photo-preview");
+  const iconeFile = document.getElementById("image-icone");
+  const photoTitle = document.getElementById("title-modal-photo");
+  const paragraph = document.querySelector(".img-type");
+  const validationBtn = document.getElementById("validation-btn");
+  const errorMessage = document.querySelector(".erreur");
+  const title = document.querySelector(".img-title");
+  const category = document.querySelector(".img-category");
+
+  inputFile.addEventListener("change", (event) => {
+    const file = inputFile.files[0]; // récupérer les éléments de l'input
+    if (file) {
+      if (file.size < 4 * 1024 * 1024) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = "flex";
+          labelFile.style.display = "none";
+          paragraph.style.display = "none";
+          iconeFile.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("Le fichier sélectionné est trop volumineux. La taille maximale est de 4 Mo.");
+      }
+    }
+  });
+
+  // créer les catégories
+  async function createCategories() {
+    const select = document.querySelector("select");
+    try {
+      const categories = await getCategory();
+      categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Erreur lors de la récupération des catégories", error);
+    }
+  }
+  createCategories();
+
+  // vérification si les tous les champs sont remplis
+  formElement.addEventListener("input", () => {
+    if (title.value !== "" && category.value !== "" && inputFile.value !== "") {
+      validationBtn.style.backgroundColor = "#1D6154";
+      validationBtn.disabled = false;
+      errorMessage.textContent = "";
+    } else {
+      validationBtn.style.backgroundColor = "#CCCCCC";
+      validationBtn.disabled = true;
+      errorMessage.textContent = "Veuillez remplir tous les champs du formulaire.";
+    }
+  });
+
+  // requête POST pour l'ajout des photos
+  formElement.addEventListener("submit", async (e) => {
+    e.preventDefault(); // éviter le comportement par défaut
+    const formData = new FormData(formElement); // Crée un objet FormData à partir du formulaire
+
+    try {
+      const response = await fetch("http://localhost:5678/api/works/", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}` // Inclut le token dans l'en-tête
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error("Requête échouée");
+      } else {
+        alert("Votre formulaire a bien été envoyé");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      displayModalPhotos();
+      displayWorks();
+
+      resetForm(); // Réinitialiser les champs du formulaire
+
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // fonction pour réinitialiser les champs du formulaire
+  function resetForm() {
+    formElement.reset(); // Réinitialiser les champs du formulaire
+    photoPreview.src = "";
+    photoPreview.style.display = "none";
+    labelFile.style.display = ""; // garder le style initial 
+    paragraph.style.display = "";
+    iconeFile.style.display = "";
+    validationBtn.style.backgroundColor = "#CCCCCC";
+    validationBtn.disabled = true;
+  }
+});
