@@ -139,10 +139,6 @@ body {
   font-family: "Work Sans";
   font-size: 14px;
 }
-/* a{
-    text-decoration: none;
-    color: #000000;
-} */
 
 section {
   margin: 50px 0;
@@ -242,6 +238,8 @@ li a {
 }
 .gallery img {
   width: 100%;
+  object-fit: cover;
+  height: 432.06px;
 }
 #contact {
   width: 50%;
@@ -357,7 +355,6 @@ footer nav ul {
   left: 0;
   z-index: 3; /*assure que la modale est au dessus du contenu de la page */
   display: none;
-  /* display: none; */
 }
 
 .modal-gallery {
@@ -412,25 +409,24 @@ footer nav ul {
 .adding-container {
   background-color: #e8f1f6;
   justify-content: center;
-width: 420px;
+  width: 420px;
   display: flex;
   flex-direction: column;
   height: 169px;
-border-radius: 3px;
-  
-text-align: center;
+  border-radius: 3px;
+
+  text-align: center;
 }
 
 #close-btn {
   top: 35px;
   right: 40px;
   position: absolute;
-  border:none;
+  border: none;
   background-color: #ffffff;
   width: 12.01px;
   height: 12.01px;
   cursor: pointer;
-  
 }
 
 #back-btn {
@@ -443,7 +439,6 @@ text-align: center;
   height: 21px;
   cursor: pointer;
   color: #000000;
-  
 }
 
 .modal-text {
@@ -451,7 +446,7 @@ text-align: center;
   font-weight: 400;
   font-size: 26px;
   line-height: 30.5px;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
 }
 .input-modal {
   display: flex;
@@ -460,59 +455,46 @@ text-align: center;
   border: 1px solid #c5c6c9;
   justify-content: space-between;
   border: none;
-
 }
-#title-modal-photo{
-     height: 51px;
+#title-modal-photo {
+  height: 51px;
 }
 
-.line{
-    width: 420px;
-    height: 1px;
-    background-color:#B3B3B3;
+.line {
+  width: 420px;
+  height: 1px;
+  background-color: #b3b3b3;
 }
 #category {
   appearance: none;
   width: 420px;
-    height: 51px;
+  height: 51px;
 }
-#label-image{
-    margin-top: -30px;
-    border: 1px solid #c5c6c9;
-    border-radius: 30px;
-    width: 150px;
-    height: 30px;
-    position: absolute;
-    background-color: #CBD6DC;
-    margin-left: 139px;
-    margin-top: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#label-image {
+  margin-top: -30px;
+  border: 1px solid #c5c6c9;
+  border-radius: 30px;
+  width: 150px;
+  height: 30px;
+  position: absolute;
+  background-color: #cbd6dc;
+  margin-left: 139px;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.img-type{
-    margin-bottom: 10px;
+.img-type {
+  margin-bottom: 10px;
 }
-/* .add{
-    font-family: 'Syne';
-    font-weight: 400;
-    font-size: 14px;
-   color: #306685;
-   background-color: #CBD6DC;
-   width: 173px;
-    text-align: center;
-    border-radius: 50px;
-    border: #CBD6DC;
-    height: 16px;
-    cursor: pointer;
-} */
+
 #image-icone {
   width: 68.14px;
   height: 59.62px;
   color: #b9c5cc;
 
   margin-top: 95px;
-  
+
   margin-left: 180px;
   transform: scale(4);
 }
@@ -580,8 +562,9 @@ text-align: center;
 
 .gallery-container img {
   width: 78.63px;
-  height: auto;
+  height: 104.92px;
   margin: 5px;
+  object-fit: cover;
 }
 
 .gallery-container figure .trash-can {
@@ -603,14 +586,12 @@ text-align: center;
 }
 
 /* style modale d'ajout */
-#image{
-    display: none;
-  }
+#image {
+  display: none;
+}
 #photo-preview {
   max-width: 110px;
-  max-height: 170px; 
-  /* margin-top: 20px;
-  padding-top: 117px; */
+  height: inherit;
   margin-left: 38%;
   display: none;
 }

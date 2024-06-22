@@ -9,7 +9,7 @@ async function getWorks() {
   if (!response.ok) {
     console.log("erreur dans la récupération des travaux");
   } else {
-    return await response.json(); // convertir la reponse en json et la stocker dans responseJson
+    return await response.json(); // convertir la reponse en json et la stocker dans response
   }
 }
 getWorks();
@@ -239,41 +239,53 @@ async function deleteWork(event, id) {
   }
 }
 
+
+
 // Ajout de projets
 
 document.addEventListener("DOMContentLoaded", () => {
   const formElement = document.querySelector(".upload-form"); // récup le form
-  const inputFile = document.getElementById("image");
+  const inputFile = document.getElementById("image"); // recup l'input type fichier
   const labelFile = document.getElementById("label-image");
-  const photoPreview = document.getElementById("photo-preview");
+  const photoPreview = document.getElementById("photo-preview"); // aperçu image 
   const iconeFile = document.getElementById("image-icone");
-  const photoTitle = document.getElementById("title-modal-photo");
   const paragraph = document.querySelector(".img-type");
   const validationBtn = document.getElementById("validation-btn");
-  const errorMessage = document.querySelector(".erreur");
-  const title = document.querySelector(".img-title");
+  const errorMessage = document.querySelector(".error"); // Sélecteur du message d'erreur
+  const title = document.getElementById("title-modal-photo");
+  const trimmedTitle = title.value.trim();
   const category = document.querySelector(".img-category");
 
+  // Vérifiez que tous les sélecteurs existent
+  if (!formElement || !inputFile || !labelFile || !photoPreview || !iconeFile || !paragraph || !validationBtn || !errorMessage || !title || !category) {
+    console.error("Un ou plusieurs éléments sont introuvables dans le DOM.");
+    return;
+  }
+
+  // Ajouter un listener pour détecter les changements dans l'input
   inputFile.addEventListener("change", (event) => {
-    const file = inputFile.files[0]; // récupérer les éléments de l'input
-    if (file) {
-      if (file.size < 4 * 1024 * 1024) {
-        const reader = new FileReader();
+    const file = inputFile.files[0]; // récupérer le premier fichier sélectionné 
+    if (file) { // vérifier si un fichier est sélectionné 
+      if (file.size < 4 * 1024 * 1024) { // taille inférieure à 4 Mo
+        const reader = new FileReader(); // lire le contenu du fichier 
+        
+        // Définit une fonction à exécuter lorsque la lecture du fichier est terminée
         reader.onload = function (e) {
-          photoPreview.src = e.target.result;
-          photoPreview.style.display = "flex";
-          labelFile.style.display = "none";
+          photoPreview.src = e.target.result; // màj la src de l'aperçu avec le contenu du fichier.
+          photoPreview.style.display = "flex"; // affiche img aperçu 
+          labelFile.style.display = "none"; 
           paragraph.style.display = "none";
           iconeFile.style.display = "none";
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // Lire le contenu du fichier en tant qu'URL de données
       } else {
         alert("Le fichier sélectionné est trop volumineux. La taille maximale est de 4 Mo.");
       }
     }
+    validateForm();
   });
 
-  // créer les catégories
+  // Créer les catégories
   async function createCategories() {
     const select = document.querySelector("select");
     try {
@@ -290,9 +302,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   createCategories();
 
-  // vérification si les tous les champs sont remplis
-  formElement.addEventListener("input", () => {
-    if (title.value !== "" && category.value !== "" && inputFile.value !== "") {
+  // Vérification si tous les champs sont remplis
+  function validateForm() {
+    if (title.value.trim() !== "" && category.value !== "" && inputFile.files.length > 0) {
       validationBtn.style.backgroundColor = "#1D6154";
       validationBtn.disabled = false;
       errorMessage.textContent = "";
@@ -301,14 +313,23 @@ document.addEventListener("DOMContentLoaded", () => {
       validationBtn.disabled = true;
       errorMessage.textContent = "Veuillez remplir tous les champs du formulaire.";
     }
-  });
+  }
 
-  // requête POST pour l'ajout des photos
+  formElement.addEventListener("input", validateForm);
+
+  // Requête POST pour l'ajout des photos
   formElement.addEventListener("submit", async (e) => {
     e.preventDefault(); // éviter le comportement par défaut
+
+    if (validationBtn.disabled) {
+      alert("Veuillez remplir tous les champs du formulaire.");
+      return;
+    }
+
     const formData = new FormData(formElement); // Crée un objet FormData à partir du formulaire
 
     try {
+      
       const response = await fetch("http://localhost:5678/api/works/", {
         method: "POST",
         headers: {
@@ -335,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // fonction pour réinitialiser les champs du formulaire
+  // Fonction pour réinitialiser les champs du formulaire
   function resetForm() {
     formElement.reset(); // Réinitialiser les champs du formulaire
     photoPreview.src = "";
@@ -345,5 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
     iconeFile.style.display = "";
     validationBtn.style.backgroundColor = "#CCCCCC";
     validationBtn.disabled = true;
+    errorMessage.textContent = "Veuillez remplir tous les champs du formulaire.";
   }
 });

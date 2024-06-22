@@ -13,7 +13,6 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="index.js" defer></script>
-    <!-- <script src="./DeleteModals.js" defer ></script> -->
     <script
       src="https://kit.fontawesome.com/55131e5517.js"
       crossorigin="anonymous"
@@ -34,8 +33,10 @@
             <li><a href="login.html" class="log-out">login</a></li>
             <li>
               <a href="#"
-                ><img class="insta-icone"
-                src="./assets/icons/instagram.png" alt="Instagram"
+                ><img
+                  class="insta-icone"
+                  src="./assets/icons/instagram.png"
+                  alt="Instagram"
               /></a>
             </li>
           </ul>
@@ -178,7 +179,7 @@
     <div class="modals-container">
       <!-- modal content -->
       <div class="modal-gallery">
-        <span><i class="fa-solid fa-xmark" ></i></span>
+        <span><i class="fa-solid fa-xmark"></i></span>
         <h2 class="modal-text">Galerie photo</h2>
         <div class="gallery-container">
           <!-- les photos seront ajoutés dynamiquement ici  -->
@@ -192,24 +193,24 @@
         <h2 class="modal-text">Ajout photo</h2>
         <form action="POST" class="upload-form" enctype="multipart/form-data">
           <div class="adding-container">
-            <img src="" alt="" id="photo-preview">
+            <img src="" alt="" id="photo-preview" />
             <i class="fa-regular fa-image" id="image-icone"></i>
-          
+
             <label for="image" id="label-image">+ Ajouter photo</label>
-            <input type="file" id="image" name="image">
+            <input type="file" id="image" name="image" />
             <p class="img-type">jpg,png : 4mo max</p>
-
           </div>
-		  <div class="input-modal">
-<label for="title" class="img-title">Titre</label>	
-<input type="text" name="title" id="title-modal-photo">	 
-<label for="category" class="img-category">Catégorie</label> 
-<select name="category" id="category"> 
-  <option value="" selected></option></select>
-  </div>
-  <div class="line"></div>
-  <input type="submit" value="Valider" id="validation-btn">
-
+          <div class="input-modal">
+            <label for="title" class="img-title">Titre</label>
+            <input type="text" name="title" id="title-modal-photo" />
+            <label for="category" class="img-category">Catégorie</label>
+            <select name="category" id="category">
+              <option value="" selected></option>
+            </select>
+          </div>
+          <div class="line"></div>
+          <p class="error" style="color: red"></p>
+          <input type="submit" value="Valider" id="validation-btn" />
         </form>
       </div>
     </div>
