@@ -109,11 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const editionMode = document.querySelector(".edition-mode");
   const modalContainer = document.querySelector(".modals-container");
   const closingBtns = document.querySelectorAll(".fa-xmark");
-  const normalMode = document.querySelector(".mode-normal");
   const displayModal = document.querySelector(".modal-gallery");
   const addBtn = document.querySelector(".add-photo");
   const goBackBtn = document.getElementById("back-btn");
-  const closeModal = document.querySelector(".close-btn");
   const secondVueModal = document.querySelector(".add-photo-vue");
 
   displayButtons();
@@ -347,7 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(data);
       displayModalPhotos();
       displayWorks();
-
       resetForm(); // Réinitialiser les champs du formulaire
 
     } catch (error) {
