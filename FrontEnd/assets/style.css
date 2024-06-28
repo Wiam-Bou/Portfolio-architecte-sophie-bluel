@@ -90,6 +90,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -104,23 +105,28 @@ nav,
 section {
   display: block;
 }
+
 body {
   margin: auto;
   background: #fffef8;
   font-size: 14px;
 }
+
 main {
   max-width: 1140px;
   margin: 0 auto;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -128,10 +134,12 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 /** end reset css**/
 body {
   max-width: 1140px;
@@ -143,6 +151,7 @@ body {
 section {
   margin: 50px 0;
 }
+
 #login,
 form {
   display: flex;
@@ -150,6 +159,7 @@ form {
   gap: 10px;
   padding-top: 18px;
 }
+
 #login {
   margin: 0 auto;
   padding: 100px 0;
@@ -157,9 +167,11 @@ form {
   flex-direction: column;
   align-items: center;
 }
+
 #login a {
   color: black;
 }
+
 h1 {
   display: flex;
   flex-direction: column;
@@ -168,67 +180,83 @@ h1 {
   font-weight: 800;
   color: #b1663c;
 }
-h1 > span {
+
+h1>span {
   font-family: "Work Sans";
   font-size: 10px;
   letter-spacing: 0.1em;
 }
+
 .project-txt {
   font-family: "Syne";
   font-weight: 700;
   font-size: 30px;
   color: #1d6154;
 }
+
 nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
 }
+
 nav li {
   padding: 0 20px;
   font-size: 1.2em;
 }
+
 li:hover {
   color: black;
 }
+
 li a:hover {
   color: black;
   font-weight: bold;
 }
+
 li a {
   text-decoration: none;
   color: #000000;
 }
+
 .insta-icone {
   width: 22px;
   color: #0000;
   height: 22px;
 }
+
 #introduction {
   display: flex;
   align-items: center;
 }
+
 #introduction figure {
   flex: 1;
 }
+
 #introduction img {
   display: block;
   margin: auto;
   width: 80%;
 }
+
 #introduction article {
   flex: 1;
 }
+
 #introduction h2 {
   margin-bottom: 1em;
 }
+
 #introduction p {
   margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
   text-align: center;
   margin-bottom: 1em;
 }
+
 .gallery {
   width: 100%;
   display: grid;
@@ -236,40 +264,49 @@ li a {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
+
 .gallery img {
   width: 100%;
   object-fit: cover;
   height: 432.06px;
 }
+
 #contact {
   width: 50%;
   margin: auto;
 }
-#contact > * {
+
+#contact>* {
   text-align: center;
 }
+
 #contact h2 {
   margin-bottom: 20px;
 }
+
 #contact form {
   text-align: left;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
+
 #contact input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
   margin: 2em 0 1em 0;
 }
+
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
@@ -280,6 +317,7 @@ input[type="submit"] {
   text-align: center;
   border-radius: 60px;
 }
+
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -288,6 +326,7 @@ footer nav ul {
   background-color: #ffff;
   width: 100%;
 }
+
 /* styles pour boutons de filtres  */
 
 .filters {
@@ -312,6 +351,7 @@ footer nav ul {
   cursor: pointer;
   padding: 8px 12px;
 }
+
 .filters button:hover {
   background-color: #1d6154;
   color: white;
@@ -323,6 +363,7 @@ footer nav ul {
   justify-content: center;
   align-items: baseline;
 }
+
 #modif-btn {
   background-color: transparent;
   border: none;
@@ -339,13 +380,15 @@ footer nav ul {
   width: 100%;
   align-items: center;
   display: flex;
-  display: none; /* réactiver via JS après login*/
+  display: none;
+  /* réactiver via JS après login*/
   gap: 10px;
 }
 
 /* STYLE POUR MODALE  */
 .modals-container {
-  position: fixed; /* position fixe pour rester en place lors du défilement */
+  position: fixed;
+  /* position fixe pour rester en place lors du défilement */
   width: 100%;
   height: 100%;
   background-color: #0000004d;
@@ -353,7 +396,8 @@ footer nav ul {
   align-items: center;
   top: 0;
   left: 0;
-  z-index: 3; /*assure que la modale est au dessus du contenu de la page */
+  z-index: 3;
+  /*assure que la modale est au dessus du contenu de la page */
   display: none;
 }
 
@@ -368,15 +412,19 @@ footer nav ul {
   align-items: center;
   position: relative;
   display: none;
+
   .fa-xmark {
     position: absolute;
-    top: 10px; /*par rapport au bord del'élément parent*/
+    top: 10px;
+    /*par rapport au bord del'élément parent*/
     right: 10px;
   }
 }
+
 .fa-xmark {
   cursor: pointer;
 }
+
 .add-photo {
   font-family: "Syne";
   font-weight: 700;
@@ -388,6 +436,7 @@ footer nav ul {
   height: 36px;
   border: none;
 }
+
 .add-photo-vue {
   background-color: #ffffff;
   width: 560px;
@@ -401,10 +450,8 @@ footer nav ul {
   border-radius: 10px;
   position: relative;
 }
-.modal-text {
-  text-align: center;
-  padding-top: 60px;
-}
+
+
 
 .adding-container {
   background-color: #e8f1f6;
@@ -414,7 +461,6 @@ footer nav ul {
   flex-direction: column;
   height: 169px;
   border-radius: 3px;
-
   text-align: center;
 }
 
@@ -441,13 +487,25 @@ footer nav ul {
   color: #000000;
 }
 
-.modal-text {
+.modal-text-two {
   color: #000000;
   font-weight: 400;
   font-size: 26px;
   line-height: 30.5px;
   font-family: "Work Sans";
+  text-align: center;
+  padding-top: 55px;
 }
+.modal-text-one{
+  color: #000000;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30.5px;
+  font-family: "Work Sans";
+  text-align: center;
+}
+
+
 .input-modal {
   display: flex;
   flex-direction: column;
@@ -456,6 +514,7 @@ footer nav ul {
   justify-content: space-between;
   border: none;
 }
+
 #title-modal-photo {
   height: 51px;
 }
@@ -465,11 +524,13 @@ footer nav ul {
   height: 1px;
   background-color: #b3b3b3;
 }
+
 #category {
   appearance: none;
   width: 420px;
   height: 51px;
 }
+
 #label-image {
   margin-top: -30px;
   border: 1px solid #c5c6c9;
@@ -484,6 +545,7 @@ footer nav ul {
   justify-content: center;
   align-items: center;
 }
+
 .img-type {
   margin-bottom: 10px;
 }
@@ -522,14 +584,17 @@ footer nav ul {
   font-size: 30px;
   color: #1d6154;
 }
+
 #email-log {
   width: 379px;
   height: 51px;
 }
+
 #password {
   width: 379px;
   height: 51px;
 }
+
 #submit {
   height: 36px;
   width: 179px;
@@ -540,6 +605,7 @@ footer nav ul {
   justify-content: space-between;
   margin: 50px 0;
 }
+
 .mode-normal {
   display: flex;
   justify-content: space-between;
@@ -580,6 +646,7 @@ footer nav ul {
   justify-content: center;
   align-items: center;
 }
+
 .trash-can {
   width: 13px;
   height: 13px;
@@ -589,6 +656,7 @@ footer nav ul {
 #image {
   display: none;
 }
+
 #photo-preview {
   max-width: 110px;
   height: inherit;

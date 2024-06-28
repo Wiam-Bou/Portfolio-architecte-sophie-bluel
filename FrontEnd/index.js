@@ -9,10 +9,10 @@ async function getWorks() {
   if (!response.ok) {
     console.log("erreur dans la récupération des travaux");
   } else {
-    return await response.json(); // convertir la reponse en json et la stocker dans response
+    return await response.json(); // convertir la reponse en json et la stocker dans responseS
   }
 }
-getWorks();
+
 
 // fonction pour afficher les works dans le DOM
 
@@ -29,9 +29,9 @@ async function displayWorks() {
     console.log(
       "Erreur : Impossible de trouver des éléments avec la classe 'gallery'"
     );
-  }
+  } 
 }
-displayWorks();
+
 
 // fonction pour créer et configurer un élément de travail
 function createWorks(work) {
@@ -49,13 +49,13 @@ function createWorks(work) {
   return figure; // figure est retourné pour être ajouté à la galerie dans la fonction displayWorks.
 }
 
-// fonction pour ajouter les boutons par catégorie
+// fonction pour ajouter les boutons par catégorieS
 // récupération tableaux catégories
 async function getCategory() {
   const response = await fetch("http://localhost:5678/api/categories");
   return await response.json();
 }
-getCategory(); // retourner la repone en JSon
+
 
 async function displayButtons() {
   const categories = await getCategory(); // const categories stock le resultat de la promesse await getCategory
@@ -72,7 +72,7 @@ async function displayButtons() {
     filters.appendChild(btn);
   });
 }
-displayButtons();
+
 
 async function filterCategory() {
   const works = await getWorks();
@@ -83,11 +83,7 @@ async function filterCategory() {
       gallery.innerHTML = "";
       if (btnId === "0") {
         // Si le bouton "Tous" est cliqué, afficher tous les travaux
-        works.forEach((work) => {
-          // const workElement = createWorks(work);
-          // gallery.appendChild(workElement);
-          displayWorks();
-        });
+        displayWorks();
       } else {
         const filteredWorks = works.filter((work) => work.categoryId == btnId); // filtrer works par catégorie
         filteredWorks.forEach((work) => {
@@ -98,7 +94,8 @@ async function filterCategory() {
     });
   });
 }
-filterCategory();
+
+
 
 // recupération du token
 
@@ -119,6 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModal = document.querySelector(".close-btn");
   const secondVueModal = document.querySelector(".add-photo-vue");
 
+  displayButtons();
+  filterCategory();
   
 
   if (token) {

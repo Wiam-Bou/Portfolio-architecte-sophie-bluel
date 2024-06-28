@@ -2,10 +2,10 @@ const form = document.querySelector("form");
 const emailInput = document.getElementById("email-log");
 const passwordInput = document.getElementById("password");
 // Récupération du span avec la classe error-msg
-const error = document.querySelector(".error-msg");
+const errorMsg = document.querySelector(".error-msg");
 
 // Initialisation du message d'erreur
-error.innerText = "";
+errorMsg.innerText = "";
 
 // Création de la fonction de redirection vers la page d'accueil
 function redirectToHome() {
@@ -45,7 +45,7 @@ form.addEventListener("submit", (e) => {
   })
   .catch((error) => {
     console.log(error);
-    error.innerText = "Échec de la connexion. Veuillez vérifier vos informations.";
+    errorMsg.innerText = "Échec de la connexion. Veuillez vérifier vos informations.";
   });
   
 });
