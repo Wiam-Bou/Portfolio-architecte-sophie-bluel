@@ -250,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const validationBtn = document.getElementById("validation-btn");
   const errorMessage = document.querySelector(".error"); // Sélecteur du message d'erreur
   const title = document.getElementById("title-modal-photo");
-  const trimmedTitle = title.value.trim();
   const category = document.querySelector(".img-category");
 
   // Vérifiez que tous les sélecteurs existent
